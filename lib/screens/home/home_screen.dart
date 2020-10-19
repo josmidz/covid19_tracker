@@ -293,6 +293,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     //  });
     // _controller.repeat(min:0,max:24,period:Duration(milliseconds:800));
     userBloc.loadUserInfo();
+    covidBloc.fetchCovidInfo();
     super.initState();
   }
 
@@ -427,7 +428,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             categoryId: snapshot.data.listCovidInfo[_currentIndex].idCategory,
                                             childInfoDataModel: snapshot.data.listCovidInfo[_currentIndex].info[index],
                                             onClick: (CovidChildInfoDataModel info){
-                                              // _showBottomSheet(context:context)
+                                              _showBottomSheet(context:context,ownInfo: snapshot.data.listCovidInfo[_currentIndex].info[index]);
                                             },
                                           );
                                         }
@@ -459,7 +460,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               mainAxisAlignment: MainAxisAlignment.center,
-                                              children:[]..addAll(_listCovidInfo.map((e) => Container(
+                                              children:[]..addAll(snapshot.data.listCovidInfo.map((e) => Container(
                                                 padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
                                                 child: Row(
                                                   mainAxisSize: MainAxisSize.min,
@@ -467,13 +468,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   children: [
                                                     CircleAvatar(
                                                       radius: 10,
-                                                      backgroundColor: ctListColors[_listCovidInfo.indexOf(e)],
+                                                      backgroundColor: ctListColors[snapshot.data.listCovidInfo.indexOf(e)],
                                                     ),
                                                     SizedBox(width: 5.0,),
                                                     Text(
-                                                      "${e['title']}",
+                                                      "${e.category}",
                                                       style: TextStyle(
-                                                        color: ctListColors[_listCovidInfo.indexOf(e)],
+                                                        color: ctListColors[snapshot.data.listCovidInfo.indexOf(e)],
                                                         // fontSize: 14.0,
                                                         // fontWeight: FontWeight.w800
                                                       ),
@@ -499,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                               child: Stack(
                                                 children: [
                                                   CustomPaint(
-                                                    foregroundPainter: PieChartClipper(listStats: _listCovidInfo),
+                                                    foregroundPainter: PieChartClipper(listStats: snapshot.data.listCovidInfo),
                                                     child: Container(),
                                                   ),
                                                   Center(
@@ -971,7 +972,7 @@ class HeaderClipper extends CustomClipper<Path> {
 
 
 class PieChartClipper extends CustomPainter {
-  List<dynamic> listStats;
+  List<CovidInfoDataModel> listStats;
   PieChartClipper({this.listStats = const[]});
   @override
   void paint(Canvas canvas, Size size) {
@@ -982,12 +983,12 @@ class PieChartClipper extends CustomPainter {
       ..style = PaintingStyle.stroke;
     var total=0;
     listStats.forEach((element) {
-      total += element['gen_value'];
+      total += element.genValue;
      });
     var startRadian = -pi/2;
     for(var i=0;i < listStats.length;i++){
       var _element = listStats[i];
-      var _sweepRadian =(_element['gen_value']/total)*2*pi;
+      var _sweepRadian =(_element.genValue/total)*2*pi;
       paint.color = ctListColors[i];
       canvas.drawArc(
         Rect.fromCircle(center:center,radius:rayon),

@@ -1,9 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:covid19_tracker/blocs/covid/covid_bloc.dart';
 import 'package:covid19_tracker/utils/ct_list_colors.dart';
 import 'package:flutter/material.dart';
 
 class AnimCircularChart extends StatefulWidget {
-  final List<dynamic> listStats;
+  final List<CovidStats> listStats;
   final index;
   AnimCircularChart({this.listStats = const[],this.index});
   @override
@@ -17,9 +18,9 @@ class _AnimCircularChartState extends State<AnimCircularChart>
   var _moyen = 0.0;
   _onAnimating(){
     for (var i = 0; i < widget.listStats.length; i++) {
-      total += widget.listStats[i]['valeur'];
+      total += widget.listStats[i].value;
     }
-    _moyen = (widget.listStats[widget.index]['valeur'] * 1)/total;
+    _moyen = (widget.listStats[widget.index].value * 1)/total;
     _controller.forward();
   }
 

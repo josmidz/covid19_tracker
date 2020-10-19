@@ -727,7 +727,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         fullscreenDialog: true
       )
     );
-  void _showBottomSheet({BuildContext context,dynamic ownInfo,dynamic allInfo,dynamic selectedIndex}){
+  void _showBottomSheet({BuildContext context,CovidChildInfoDataModel ownInfo,}){
     showModalBottomSheet(context: context, builder: (_){
       return Container(
         height: 0.8 * MediaQuery.of(context).size.height,
@@ -781,7 +781,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   margin: EdgeInsets.only(left: 5.0),
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: AssetImage("${ownInfo['flag']}"),
+                                      image: NetworkImage("${ownInfo.country.countryflag}"),
                                       fit: BoxFit.cover
                                     )
                                   ),
@@ -795,7 +795,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "${ownInfo['country']}",
+                                        "${ownInfo.country.countryname}",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: ctColor2,
@@ -821,7 +821,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Text(
-                                  "Stats. ${ownInfo['country']}",
+                                  "Stats. ${ownInfo.country.countryname}",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: ctColor2,
@@ -839,7 +839,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    for(var i=0; i < ownInfo['stats'].length;i++)
+                                    for(var i=0; i < ownInfo.stats.length;i++)
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
@@ -849,13 +849,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             SizedBox(width: 10.0,),
                                             CircleAvatar(
                                               radius: 10,
-                                              backgroundColor: ctListColors[ownInfo['stats'].indexOf(ownInfo['stats'][i])],
+                                              backgroundColor: ctListColors[ownInfo.stats.indexOf(ownInfo.stats[i])],
                                             ),
                                             SizedBox(width: 5.0,),
                                             Text(
-                                              "${ownInfo['stats'][i]['title']}",
+                                              "${ownInfo.stats[i].categoryname}",
                                               style: TextStyle(
-                                                color: ctListColors[ownInfo['stats'].indexOf(ownInfo['stats'][i])],
+                                                color: ctListColors[ownInfo.stats.indexOf(ownInfo.stats[i])],
                                                 // fontSize: 14.0,
                                                 // fontWeight: FontWeight.w800
                                               ),
@@ -871,64 +871,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 child: Wrap(
                                   alignment: WrapAlignment.center,
                                   children: [
-                                    for(var i=0; i < ownInfo['stats'].length;i++)
-                                      AnimCircularChart(index: i,listStats: ownInfo['stats'],)
+                                    for(var i=0; i < ownInfo.stats.length;i++)
+                                      AnimCircularChart(index: i,listStats:ownInfo.stats,)
                                   ],
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 10.0,),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Icon(
-                                  LineAwesomeIcons.alternate_arrows_horizontal,
-                                  color: ctColor2,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: "Comparateur : ",
-                                     style: TextStyle(
-                                      color: ctColor2,
-                                      fontSize: 20.0
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text: "${allInfo[selectedIndex]['title']}",
-                                        style: TextStyle(
-                                          color: ctColor6,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold
-                                        ), 
-                                      )
-                                    ]
-                                  )
-                                ), 
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 10.0,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                // flex: 5,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    for(var i=0; i < allInfo[selectedIndex]['info'].length;i++)
-                                      AnimLinearChart(loopIndex: i,selectedIndex:selectedIndex,listStats: allInfo[selectedIndex]['info'],)
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 10.0,),
+                          SizedBox(height: 10.0,),  
                           Row(
                             children: [
                               Padding(
@@ -956,12 +906,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             child:ListTile(
                                   leading: CircleAvatar(
                                     radius: 25.0,
-                                    backgroundImage: AssetImage("${ownInfo['expert']['photo']}"),
+                                    backgroundImage: NetworkImage("${ownInfo.expert.photo}"),
                                   ),
                                   title: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      "${ownInfo['expert']['name']}".toUpperCase(),
+                                      "${ownInfo.expert.fullname}".toUpperCase(),
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                         color: ctColor8,
@@ -970,7 +920,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   subtitle: Text(
-                                    "${ownInfo['expert']['description']}",
+                                    "Nationalité : ${ownInfo.expert.nationality}",
                                     textAlign: TextAlign.left,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,

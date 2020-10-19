@@ -1,0 +1,1 @@
+final ctMainLink = "http://127.0.0.1:4404/cov-tracker/v1";

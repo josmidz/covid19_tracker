@@ -78,15 +78,17 @@ class _FailScreenState extends State<FailScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(width: 15.0,),
                 Flexible(
                   child: Text(
-                    "Quelque chose s'est mal passée",
+                    widget.message ?? "Quelque chose s'est mal passée",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey,
                     ),
                   ),
                 ),
+                SizedBox(width: 15.0,),
               ],
             ),
             SizedBox(height: 30,),

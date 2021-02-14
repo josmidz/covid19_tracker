@@ -1,11 +1,12 @@
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:covid19_tracker/blocs/covid/covid_bloc.dart';
 import 'package:covid19_tracker/utils/ct_list_colors.dart';
 import 'package:flutter/material.dart';
 
 class AnimLinearChart extends StatefulWidget {
-  final List<dynamic> listStats;
+  final List<CovidChildInfoDataModel> listStats;
   final loopIndex;
   final selectedIndex;
   AnimLinearChart({this.loopIndex, this.listStats = const[],this.selectedIndex});
@@ -20,9 +21,9 @@ class _AnimLinearChartState extends State<AnimLinearChart>
   var _moyen = 0.0;
   _onAnimating(){
     for (var i = 0; i < widget.listStats.length; i++) {
-      total += widget.listStats[i]['stats'][widget.selectedIndex]['valeur'];
+      total += widget.listStats[i].stats[widget.selectedIndex].value;
     }
-    _moyen = (widget.listStats[widget.loopIndex]['stats'][widget.selectedIndex]['valeur'] * 1)/total;
+    _moyen = (widget.listStats[widget.loopIndex].stats [widget.selectedIndex].value * 1)/total;
     _controller.forward();
   }
 
@@ -64,7 +65,7 @@ class _AnimLinearChartState extends State<AnimLinearChart>
                       ),
                       SizedBox(width: 5.0,),
                       Text(
-                        "${widget.listStats[widget.loopIndex]['country']}",
+                        "${widget.listStats[widget.loopIndex].country.countryname}",
                         style: TextStyle(
                           color: ctListColors[widget.listStats.indexOf(widget.listStats[widget.loopIndex])],
                           // fontSize: 14.0,

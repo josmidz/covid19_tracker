@@ -91,6 +91,13 @@ class _EditScreenState extends State<EditScreen> {
                     WhitelistingTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(9)
                   ],
+                  validator: (String value){
+                    if(value.isEmpty) return "Veuillez renseigner le nouveau cas";
+                    return null;
+                  },
+                  onChanged:(s){setState(() {
+                    
+                  });},
                   decoration: InputDecoration(
                     labelText: 'nouveau cas',
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -126,16 +133,22 @@ class _EditScreenState extends State<EditScreen> {
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.number,
-                  obscureText: true,
                   textInputAction: TextInputAction.next,
                   controller: _decesController,
                   focusNode: _decesFocusNode,
                   onFieldSubmitted: (v)=>
                     _swapFocus(_decesFocusNode,context,_guerisFocusNode),
+                  onChanged:(s){setState(() {
+                    
+                  });},
                   inputFormatters: [
                     WhitelistingTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(9),
+                    LengthLimitingTextInputFormatter(10),
                   ],
+                  validator: (String value){
+                    if(value.isEmpty) return "Veuillez renseigner le nombre de décès";
+                    return null;
+                  },
                   decoration: InputDecoration(
                   //  hintText: 'mot de passe',
                     prefixIcon: Icon(Icons.dialpad),
@@ -172,16 +185,22 @@ class _EditScreenState extends State<EditScreen> {
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.number,
-                  obscureText: true,
                   textInputAction: TextInputAction.next,
                   controller: _guerisController,
                   focusNode: _guerisFocusNode,
                   onFieldSubmitted: (v)=>
                     _swapFocus(_guerisFocusNode,context),
+                  onChanged:(s){setState(() {
+                    
+                  });},
                   inputFormatters: [
                     WhitelistingTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(9),
                   ],
+                  validator: (String value){
+                    if(value.isEmpty) return "Veuillez renseigner le nombre de guéris";
+                    return null;
+                  },
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.dialpad),
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -260,11 +279,12 @@ class _EditScreenState extends State<EditScreen> {
           "appversion":"${userBloc.appVersion}",
           "cache-control":"no-cache"
         },
-        link: "$ctMainLink/experts/save-covid-info",
+        link: "$ctMainLink/covid/add",
         body: {
           "nouveaucas":"${_nouveauCasController.text.trim().toLowerCase()}",
           "gueris":"${_guerisController.text.trim()}",
-          "deces":"${_decesController.text.trim()}"
+          "deces":"${_decesController.text.trim()}",
+          "token":"${userBloc.userBlocDataModel.usertoken}"
         }
       );
       Navigator.of(_keyloader.currentContext,rootNavigator: true).pop();
@@ -285,13 +305,15 @@ class _EditScreenState extends State<EditScreen> {
       } else {
         Map<String,dynamic> _response = _result.data;
         if(_response.containsKey('status') && _response['status'] == true){
-          var _data = _response['data'];
-          userBloc.assignUserCovidState(userCovidDataModel: UserCovidDataModel(
-            nouveaucas: _data['nouveaucas'],
-            gueris: _data['gueris'],
-            deces: _data['deces']
+          _guerisController.clear();
+          _decesController.clear();
+          _nouveauCasController.clear();
+          userBloc.loadUserInfo();
+          Scaffold.of(_ctx)
+          .showSnackBar(SnackBar(
+            content: Text(_response['message'],style: TextStyle(color: ctColor1),),
+            backgroundColor: ctColor2,
           ));
-
         } else if(_response.containsKey('status') && _response['status']== false){
           appShowMessageDialog(
             context: context,

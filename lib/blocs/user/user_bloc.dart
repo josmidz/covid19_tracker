@@ -22,8 +22,8 @@ class UserBloc extends BlocBase {
   AppEvent _appUserCovidEvent = NoState();
 
   //---
-  UserCovidDataModel _userCovidDataModel = UserCovidDataModel();
-  UserCovidDataModel get userCovidDataModel => _userCovidDataModel;
+  List<UserCovidDataModel> _listUserCovidInfo = <UserCovidDataModel>[];
+  List<UserCovidDataModel> get listUserCovidInfo => _listUserCovidInfo;
 
   UserDataModel _userBlocDataModel = UserDataModel();
   UserDataModel get userBlocDataModel => _userBlocDataModel;
@@ -102,14 +102,14 @@ class UserBloc extends BlocBase {
       _userCovidStreamController = StreamController<UserCovidBlocDataModel>.broadcast();
       _userCovidStreamController.sink.add(UserCovidBlocDataModel(
         appUserCovidEvent: _appUserCovidEvent,
-        userCovidDataModel: userCovidDataModel??  _userCovidDataModel
+        listUserCovidInfo: userCovidDataModel??  _listUserCovidInfo
       ));
       if(userCovidDataModel !=null)
         loadUserCovid();
     } else {
       _userCovidStreamController.sink.add(UserCovidBlocDataModel(
         appUserCovidEvent: _appUserCovidEvent,
-        userCovidDataModel: userCovidDataModel?? _userCovidDataModel
+        listUserCovidInfo: userCovidDataModel?? _listUserCovidInfo
       ));
       if(userCovidDataModel !=null)
         loadUserCovid();
@@ -139,12 +139,16 @@ class UserBloc extends BlocBase {
         Map<String,dynamic> _res = result.data;
         if(_res.containsKey('status') 
           && _res['status'] == true){
+            _listUserCovidInfo.clear();
             var _data = _res['data'];
-          _userCovidDataModel = UserCovidDataModel(
-            deces: _data['deces'],
-            nouveaucas: _data['nouveaucas'],
-            gueris: _data['deces'],
-          );
+          for (var i = 0; i < _data.length; i++) {
+            _listUserCovidInfo.add(UserCovidDataModel(
+              categoryname: _data[i]['categoryname'],
+              categoryid: _data[i]['categoryid'],
+              covidinfo:  _data[i]['covidinfo'],
+              id  :  _data[i]['id'],
+            ));
+          }
           assignUserCovidState(appUserCovidEvent: LoadedState());
         } else if(_res.containsKey('status') 
           && _res['status'] == false){
@@ -163,16 +167,17 @@ class UserBloc extends BlocBase {
 final UserBloc userBloc = UserBloc();
 
 class UserCovidDataModel {
-  dynamic nouveaucas;
-  dynamic deces;
-  dynamic gueris;
-  UserCovidDataModel({this.deces=0,this.gueris=0,this.nouveaucas=0});
+  dynamic categoryname;
+  dynamic categoryid;
+  dynamic covidinfo;
+  dynamic id;
+  UserCovidDataModel({this.categoryname,this.categoryid,this.covidinfo,this.id});
 }
 
 class UserCovidBlocDataModel {
   AppEvent appUserCovidEvent;
-  UserCovidDataModel userCovidDataModel;
-  UserCovidBlocDataModel({this.appUserCovidEvent,this.userCovidDataModel});
+  List<UserCovidDataModel> listUserCovidInfo;
+  UserCovidBlocDataModel({this.appUserCovidEvent,this.listUserCovidInfo = const[]});
 }
 
 class UserBlocDataModel {

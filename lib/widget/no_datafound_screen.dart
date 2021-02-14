@@ -25,7 +25,7 @@ class _NoDataFoundScreenState extends State<NoDataFoundScreen>
       }
      });
     //  controller1.forward();
-    _controller.animateTo(35,duration: Duration(milliseconds: 1000));
+    _controller.animateTo(24,duration: Duration(milliseconds: 1000));
     super.initState();
   }
 

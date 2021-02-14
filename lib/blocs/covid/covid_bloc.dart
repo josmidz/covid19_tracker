@@ -32,8 +32,10 @@ class CovidBloc extends BlocBase{
           'cache-control':'no-cache',
           "app-version":"${userBloc.appVersion}"
         },
-        link: "$ctMainLink/covid-info/all"
+        link: "$ctMainLink/covid"
       );
+      // print(result.data);
+      // print(result.error);
       if(result.error !=null ) {
         if(result.error is SocketException){
           _assignCovidState(appEvent: NoNetworkState());
@@ -45,7 +47,7 @@ class CovidBloc extends BlocBase{
         if(_res.containsKey('status') 
           && _res['status'] == true){
             _listCovidInfo.clear();
-            List<dynamic> _list = _res['data'];
+            var _list = _res['data'];
             for(var i=0;i<_list.length;i++){
               var _el = _list[i];
               _listCovidInfo.add(
@@ -72,7 +74,7 @@ class CovidBloc extends BlocBase{
                     stats: <CovidStats>[],
                   )
                 );
-                for(var k=0; k <_el['info'][j]['stats'];k++){
+                for(var k=0; k <_el['info'][j]['stats'].length;k++){
                   var _element =_el['info'][j]['stats'][k];
                   _listCovidInfo[i].info[j].stats.add(
                     CovidStats(
@@ -88,12 +90,14 @@ class CovidBloc extends BlocBase{
         } else if(_res.containsKey('status') 
           && _res['status'] == false){
             var _message = _res['message'];
+            print(_message);
             _assignCovidState(appEvent: FailWithMessageState(message:_message ));
         } else {
           _assignCovidState(appEvent: FailState());
         }
       }
     } catch(e){
+      print("all Error :  $e");
       _assignCovidState(appEvent: FailState());
     }
   }

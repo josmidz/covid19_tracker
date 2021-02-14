@@ -2,6 +2,7 @@ import 'package:covid19_tracker/blocs/covid/covid_bloc.dart';
 import 'package:covid19_tracker/screens/home/painter_clippers/painter_clippers.dart';
 import 'package:covid19_tracker/utils/ct_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class CovidCardViewModel extends StatelessWidget {
@@ -68,7 +69,7 @@ class CovidCardViewModel extends StatelessWidget {
                   SizedBox(height: 5.0,),
                   Text(
                     childInfoDataModel.stats.where((element) => element.categoryid.toString() == categoryId.toString()).toList().length >0
-                      ? childInfoDataModel.stats.where((element) => element.categoryid.toString() == categoryId.toString()).toList()[0].value
+                      ? NumberFormat().format(childInfoDataModel.stats.where((element) => element.categoryid.toString() == categoryId.toString()).toList()[0].value).toString()
                       :"---",
                     // "",
                     style: TextStyle(

@@ -32,248 +32,249 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  List<dynamic> _listStat = [
-    {
-      "title":"Nouveaux cas",
-      "valeur": 89438,
-    },
-    {
-      "title":"Décès",
-      "valeur": 8938,
-    },
-    {
-      "title":"Guéri(s)",
-      "valeur": 5438,
-    },
-  ];
+  // List<dynamic> _listStat = [
+  //   {
+  //     "title":"Nouveaux cas",
+  //     "valeur": 89438,
+  //   },
+  //   {
+  //     "title":"Décès",
+  //     "valeur": 8938,
+  //   },
+  //   {
+  //     "title":"Guéri(s)",
+  //     "valeur": 5438,
+  //   },
+  // ];
 
-  List<dynamic> _listCovidInfo = <Map<String,dynamic>>[
-    {
-      "title":"Nouveau cas",
-      "gen_value":84242,
-      "info":[
-        {
-          "country":"USA",
-          "flag":"assets/images/usa.png",
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 89438,
-            },
-            {
-              "title":"Décès",
-              "valeur": 8938,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur": 5438,
-            },
-          ],
-          "expert":{
-            "name":"josmidz delatour",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          }
-        },
-        {
-          "country":"AFRIQUE DU SUD",
-          "flag":"assets/images/sudaf.png",
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 9438,
-            },
-            {
-              "title":"Décès",
-              "valeur": 3938,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur": 438,
-            },
-          ],
-          "expert":{
-            "name":"alba conord",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          }
-        },
-        {
-          "country":"CANADA",
-          "flag":"assets/images/canada.png",
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 738,
-            },
-            {
-              "title":"Décès",
-              "valeur": 38,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur": 138,
-            },
-          ],
-          "expert":{
-            "name":"smith perez",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          }
-        },
-      ]
-    },
-    {
-      "title":"Décès",
-      "gen_value":424242,
-      "info":[
-        {
-          "country":"AFRIQUE DU SUD",
-          "flag":"assets/images/sudaf.png",
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 6438,
-            },
-            {
-              "title":"Décès",
-              "valeur": 238,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur":95,
-            },
-          ],
-          "expert":{
-            "name":"josmidz delatour",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          }
-        },
-        {
-          "country":"USA",
-          "flag":"assets/images/usa.png",
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 9438,
-            },
-            {
-              "title":"Décès",
-              "valeur": 538,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur":105,
-            },
-          ],
-          "expert":{
-            "name":"josmidz delatour",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          }
-        },
-        {
-          "country":"CANADA",
-          "flag":"assets/images/canada.png",
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 1438,
-            },
-            {
-              "title":"Décès",
-              "valeur": 338,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur":105,
-            },
-          ],
-          "expert":{
-            "name":"smith perez",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          }
-        },
-      ]
-    },
-    {
-      "title":"Guéri(s)",
-      "gen_value":14242,
-      "info":[
-        {
-          "country":"CANADA",
-          "flag":"assets/images/canada.png",
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 8418,
-            },
-            {
-              "title":"Décès",
-              "valeur": 308,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur": 100,
-            },
-          ],
-          "expert":{
-            "name":"smith perez",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          }
-        },
-        {
-          "country":"AFRIQUE DU SUD",
-          "flag":"assets/images/sudaf.png",
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 2438,
-            },
-            {
-              "title":"Décès",
-              "valeur": 108,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur": 70,
-            },
-          ],
-          "expert":{
-            "name":"alba conord",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          },
-        },
-        {
-          "country":"USA",
-          "flag":"assets/images/usa.png",
-          "expert":{
-            "name":"josmidz delatour",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
-            "photo":"assets/images/user_pic.png"
-          },
-          "stats":[
-            {
-              "title":"Nouveaux cas",
-              "valeur": 2438,
-            },
-            {
-              "title":"Décès",
-              "valeur": 78,
-            },
-            {
-              "title":"Guéri(s)",
-              "valeur": 80,
-            },
-          ],
-        }
-      ]
-    }
-  ];
+  // List<dynamic> _listCovidInfo = <Map<String,dynamic>>[
+  //   {
+  //     "title":"Nouveau cas",
+  //     "gen_value":84242,
+  //     "info":[
+  //       {
+  //         "country":"USA",
+  //         "flag":"assets/images/usa.png",
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 89438,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 8938,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur": 5438,
+  //           },
+  //         ],
+  //         "expert":{
+  //           "name":"josmidz delatour",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         }
+  //       },
+  //       {
+  //         "country":"AFRIQUE DU SUD",
+  //         "flag":"assets/images/sudaf.png",
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 9438,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 3938,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur": 438,
+  //           },
+  //         ],
+  //         "expert":{
+  //           "name":"alba conord",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         }
+  //       },
+  //       {
+  //         "country":"CANADA",
+  //         "flag":"assets/images/canada.png",
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 738,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 38,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur": 138,
+  //           },
+  //         ],
+  //         "expert":{
+  //           "name":"smith perez",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         }
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     "title":"Décès",
+  //     "gen_value":424242,
+  //     "info":[
+  //       {
+  //         "country":"AFRIQUE DU SUD",
+  //         "flag":"assets/images/sudaf.png",
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 6438,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 238,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur":95,
+  //           },
+  //         ],
+  //         "expert":{
+  //           "name":"josmidz delatour",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         }
+  //       },
+  //       {
+  //         "country":"USA",
+  //         "flag":"assets/images/usa.png",
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 9438,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 538,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur":105,
+  //           },
+  //         ],
+  //         "expert":{
+  //           "name":"josmidz delatour",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         }
+  //       },
+  //       {
+  //         "country":"CANADA",
+  //         "flag":"assets/images/canada.png",
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 1438,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 338,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur":105,
+  //           },
+  //         ],
+  //         "expert":{
+  //           "name":"smith perez",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         }
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     "title":"Guéri(s)",
+  //     "gen_value":14242,
+  //     "info":[
+  //       {
+  //         "country":"CANADA",
+  //         "flag":"assets/images/canada.png",
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 8418,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 308,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur": 100,
+  //           },
+  //         ],
+  //         "expert":{
+  //           "name":"smith perez",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         }
+  //       },
+  //       {
+  //         "country":"AFRIQUE DU SUD",
+  //         "flag":"assets/images/sudaf.png",
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 2438,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 108,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur": 70,
+  //           },
+  //         ],
+  //         "expert":{
+  //           "name":"alba conord",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         },
+  //       },
+  //       {
+  //         "country":"USA",
+  //         "flag":"assets/images/usa.png",
+  //         "expert":{
+  //           "name":"josmidz delatour",
+  //           "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  //           "photo":"assets/images/user_pic.png"
+  //         },
+  //         "stats":[
+  //           {
+  //             "title":"Nouveaux cas",
+  //             "valeur": 2438,
+  //           },
+  //           {
+  //             "title":"Décès",
+  //             "valeur": 78,
+  //           },
+  //           {
+  //             "title":"Guéri(s)",
+  //             "valeur": 80,
+  //           },
+  //         ],
+  //       }
+  //     ]
+  //   }
+  // ];
+  
   int _currentIndex =0;
   _assignIndexFx({int i}){
     setState(() {
@@ -374,7 +375,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
                       Container(
-                        height: 0.6 * MediaQuery.of(context).size.height,
+                        height: 440.0,
                         child: Column(
                           children: [
                             if(snapshot.data.appEvent is NoState || snapshot.data.appEvent is LoadingState)
@@ -533,6 +534,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
                                   ],
                                 ))
+                            else if (snapshot.data.appEvent is FailWithMessageState)
+                              Expanded( child: FailScreen(message: (snapshot.data.appEvent as FailWithMessageState).message , refresh: (){covidBloc.fetchCovidInfo();},))
                             else
                               Expanded(child: FailScreen(refresh: (){covidBloc.fetchCovidInfo();},))
                           ],
@@ -697,7 +700,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       //   fullscreenDialog: true
       // )
     );
-  _openLogin({BuildContext context}){
+  _openLogin({BuildContext context}) async{
     if(userBloc.userBlocDataModel.usertoken == null){
       Navigator.of(context).push(
         CupertinoPageRoute(
@@ -713,12 +716,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         )
       );
     } else {
-      Navigator.of(context).push(
+     await Navigator.of(context).push(
         CupertinoPageRoute(
           builder: (_) => UserScreen(),
           fullscreenDialog: true
         )
       );
+      covidBloc.fetchCovidInfo();
     }
   } 
 
@@ -945,7 +949,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       );
     });
   }
-
+  
   
 }
 
